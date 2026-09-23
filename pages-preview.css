@@ -73,8 +73,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .menu-toggle { display: none; width: 36px; height: 36px; place-items: center; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-1); cursor: pointer; }
 .main-content { width: min(100%, 1560px); margin: 0 auto; padding: 27px 30px 48px; }
 .page-stack { display: flex; flex-direction: column; gap: 17px; }
-.preview-notice { display: flex; align-items: center; gap: 10px; border: 1px solid rgb(255 106 26 / 23%); border-radius: 10px; background: rgb(255 106 26 / 5%); padding: 10px 13px; color: var(--text-secondary); font-size: 11px; line-height: 1.5; }
-.preview-notice svg { flex: 0 0 auto; color: var(--accent); }
+.preview-notice { display: flex; align-self: flex-start; width: fit-content; max-width: min(100%, 860px); align-items: center; gap: 10px; border: 1px solid rgb(255 106 26 / 23%); border-radius: 10px; background: rgb(255 106 26 / 5%); padding: 10px 13px; color: var(--text-secondary); font-size: 11px; line-height: 1.5; }
+.preview-notice svg { width: 16px; height: 16px; flex: 0 0 16px; color: var(--accent); }
 .preview-notice strong { color: #ffae7c; font-size: 10px; }
 .page-heading { display: flex; min-height: 75px; align-items: flex-end; justify-content: space-between; gap: 20px; padding: 2px 1px 1px; }
 .heading-copy { min-width: 0; }
