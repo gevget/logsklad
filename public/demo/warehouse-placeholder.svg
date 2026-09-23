@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Фото складской приёмки</title><desc id="desc">Демо-иллюстрация складской зоны и принятых грузов</desc>
+  <defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#24272d"/><stop offset="1" stop-color="#111216"/></linearGradient></defs>
+  <rect width="960" height="600" fill="url(#bg)"/><path d="M0 402 480 270l480 132v198H0z" fill="#17191e"/><path d="m0 402 480-132 480 132" fill="none" stroke="#454a53" stroke-width="3"/>
+  <g fill="none" stroke="#555b65" stroke-width="8"><path d="M130 111v300M390 83v257M650 83v257M830 111v299"/><path d="M121 208h741M121 305h741"/></g>
+  <g stroke="#262930" stroke-width="7"><path d="M131 207h731M131 304h731"/></g>
+  <g><path d="m183 266 66-27 67 26-67 30z" fill="#d09a6e"/><path d="m183 266 66 29v74l-66-28z" fill="#9a6c49"/><path d="m249 295 67-30v74l-67 30z" fill="#754f37"/><path d="m406 165 67-29 67 28-67 30z" fill="#d09a6e"/><path d="m406 165 67 29v74l-67-27z" fill="#9a6c49"/><path d="m473 194 67-30v74l-67 30z" fill="#754f37"/><path d="m663 262 66-28 66 29-66 29z" fill="#d09a6e"/><path d="m663 262 66 30v74l-66-29z" fill="#9a6c49"/><path d="m729 292 66-29v74l-66 29z" fill="#754f37"/></g>
+  <rect x="28" y="28" width="168" height="31" rx="15" fill="#17181e" stroke="#ffffff" stroke-opacity=".12"/><circle cx="48" cy="44" r="4" fill="#45b8ff"/><text x="62" y="48" fill="#c5c8cf" font-family="Arial,sans-serif" font-size="12" letter-spacing="1.2">ДЕМО-ПРИЁМКА</text>
+</svg>

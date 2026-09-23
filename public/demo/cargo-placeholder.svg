@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Фото груза</title><desc id="desc">Демо-фото упаковки груза на складе</desc>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#252830"/><stop offset="1" stop-color="#121318"/></linearGradient><linearGradient id="box" x2="0" y2="1"><stop stop-color="#bb8355"/><stop offset="1" stop-color="#71503a"/></linearGradient></defs>
+  <rect width="960" height="600" fill="url(#bg)"/><path d="M0 440h960v160H0z" fill="#111216"/><path d="M0 440 960 383" stroke="#373a42" stroke-width="2"/>
+  <g opacity=".5" stroke="#41454e"><path d="M86 72v300M218 72v292M352 72v284M486 72v276M620 72v268M754 72v260M888 72v252"/><path d="M72 143h816M72 211h816M72 279h816M72 347h816"/></g>
+  <g transform="translate(295 156)"><path d="m0 76 172-76 183 74-179 82z" fill="#d29b6e"/><path d="m0 76 176 80v202L0 277z" fill="url(#box)"/><path d="m176 156 179-82v203l-179 81z" fill="#825c40"/><path d="m172 0 4 156" stroke="#e3b186" stroke-width="12"/><path d="m76 42 181 77" stroke="#9b6947" stroke-width="3"/><rect x="214" y="205" width="79" height="49" rx="4" fill="#1d1f26" stroke="#c4a47c"/><path d="M228 220h47m-47 9h39m-39 9h30" stroke="#c4a47c" stroke-width="3"/></g>
+  <rect x="28" y="28" width="143" height="31" rx="15" fill="#17181e" stroke="#ffffff" stroke-opacity=".12"/><circle cx="48" cy="44" r="4" fill="#ff6a1a"/><text x="62" y="48" fill="#c5c8cf" font-family="Arial,sans-serif" font-size="12" letter-spacing="1.2">ДЕМО-ФОТО ГРУЗА</text>
+</svg>
