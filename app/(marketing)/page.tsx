@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-html-link-for-pages -- /demo is a cookie-setting GET route, so these links intentionally perform a full navigation. */
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -26,6 +25,9 @@ const tones = {
   blue: styles.toneBlue,
   green: styles.toneGreen,
 } as const;
+
+const pageBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const demoHref = process.env.NEXT_PUBLIC_DEMO_URL ?? "/demo";
 
 const features = [
   { Icon: ClipboardCheck, tone: tones.orange, number: "01", tag: "ЕДИНЫЙ ЖИЗНЕННЫЙ ЦИКЛ", title: "Заявки и статусы", text: "Создание, проверка менеджером и общая история — от первого запроса до результата." },
@@ -67,7 +69,7 @@ function Brand() {
 }
 
 function DemoButton() {
-  return <a className={[styles.button, styles.buttonPrimary].join(" ")} href="/demo">Открыть демо <ArrowUpRight size={17} /></a>;
+  return <a className={[styles.button, styles.buttonPrimary].join(" ")} href={demoHref}>Открыть демо <ArrowUpRight size={17} /></a>;
 }
 
 function ProductPreview() {
@@ -129,7 +131,7 @@ export default function LandingPage() {
         <div className={styles.headerInner}>
           <Brand />
           <nav className={styles.navigation} aria-label="Навигация по странице"><a href="#platform">Платформа</a><a href="#roles">Роли</a><a href="#process">Процесс</a><a href="#roadmap">Развитие</a></nav>
-          <a className={styles.headerDemo} href="/demo">Демо <ArrowUpRight size={16} /></a>
+          <a className={styles.headerDemo} href={demoHref}>Демо <ArrowUpRight size={16} /></a>
         </div>
       </header>
 
@@ -169,21 +171,21 @@ export default function LandingPage() {
           <div className={styles.photoStoryGrid}>
             <article className={styles.photoCard}>
               <div className={styles.photoFrame}>
-                <Image className={styles.photoImage} src="/landing/hub-manager-truck.webp" alt="Менеджер логистики на площадке распределительного центра рядом с грузовым автомобилем и подготовленным грузом" fill sizes="(max-width: 680px) 100vw, (max-width: 900px) 50vw, 34vw" />
+                <Image className={styles.photoImage} src={`${pageBasePath}/landing/hub-manager-truck.webp`} alt="Менеджер логистики на площадке распределительного центра рядом с грузовым автомобилем и подготовленным грузом" fill sizes="(max-width: 680px) 100vw, (max-width: 900px) 50vw, 34vw" />
                 <div className={styles.photoShade} />
                 <div className={styles.photoCaption}><span>01 / ПЕРЕВОЗКА</span><h3>Каждый рейс — в общей картине</h3></div>
               </div>
             </article>
             <article className={styles.photoCard}>
               <div className={styles.photoFrame}>
-                <Image className={styles.photoImage} src="/landing/warehouse-operations.webp" alt="Сотрудница склада сканирует подготовленные к отгрузке коробки" fill sizes="(max-width: 680px) 100vw, (max-width: 900px) 50vw, 34vw" />
+                <Image className={styles.photoImage} src={`${pageBasePath}/landing/warehouse-operations.webp`} alt="Сотрудница склада сканирует подготовленные к отгрузке коробки" fill sizes="(max-width: 680px) 100vw, (max-width: 900px) 50vw, 34vw" />
                 <div className={styles.photoShade} />
                 <div className={styles.photoCaption}><span>02 / СКЛАД</span><h3>Приёмка начинается с точных данных</h3></div>
               </div>
             </article>
             <article className={styles.photoCard}>
               <div className={styles.photoFrame}>
-                <Image className={styles.photoImage} src="/landing/dispatch-team.webp" alt="Диспетчер и водитель сверяют сведения о грузе у открытого грузового автомобиля" fill sizes="(max-width: 680px) 100vw, (max-width: 900px) 50vw, 34vw" />
+                <Image className={styles.photoImage} src={`${pageBasePath}/landing/dispatch-team.webp`} alt="Диспетчер и водитель сверяют сведения о грузе у открытого грузового автомобиля" fill sizes="(max-width: 680px) 100vw, (max-width: 900px) 50vw, 34vw" />
                 <div className={styles.photoShade} />
                 <div className={styles.photoCaption}><span>03 / КОМАНДА</span><h3>Передача груза без потери контекста</h3></div>
               </div>
@@ -214,7 +216,7 @@ export default function LandingPage() {
         <div className={styles.container}>
           <div className={styles.sectionHeading}><div><div className={styles.sectionEyebrow}>ОДНА СИСТЕМА · ПЯТЬ РОЛЕЙ</div><h2 id="roles-title">Каждому — свой обзор.<br />Команде — общий процесс.</h2></div><p>Права и интерфейс учитывают работу человека: заказчик не видит внутренние данные, водитель — только свои задания, склад — свои операции.</p></div>
           <div className={styles.rolesGrid}>{roles.map((role, index) => { const Icon = role.Icon; return <article className={styles.roleCard} key={role.title}><div className={styles.roleTop}><span className={[styles.roleIcon, role.tone].join(" ")}><Icon size={22} strokeWidth={1.8} /></span><span className={styles.roleNumber}>0{index + 1}</span></div><span className={styles.roleLabel}>{role.label}</span><h3>{role.title}</h3><p>{role.text}</p><div className={styles.roleOutcome}><Check size={15} /><span>{role.result}</span></div></article>; })}</div>
-          <div className={styles.rolesDemo}><div className={styles.roleAvatars} aria-hidden="true"><span>З</span><span>М</span><span>В</span><span>С</span><span>А</span></div><p><strong>Посмотрите один процесс глазами разных участников.</strong> В демо можно переключить роль в нижней части кабинета.</p><a href="/demo">Перейти в демо <ArrowUpRight size={16} /></a></div>
+          <div className={styles.rolesDemo}><div className={styles.roleAvatars} aria-hidden="true"><span>З</span><span>М</span><span>В</span><span>С</span><span>А</span></div><p><strong>Посмотрите один процесс глазами разных участников.</strong> В демо можно переключить роль в нижней части кабинета.</p><a href={demoHref}>Перейти в демо <ArrowUpRight size={16} /></a></div>
         </div>
       </section>
 

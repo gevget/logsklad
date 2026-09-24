@@ -1,4 +1,4 @@
-name: Deploy static preview to GitHub Pages
+name: Deploy LogSklad landing to GitHub Pages
 
 on:
   push:
@@ -20,17 +20,56 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
 
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.12.4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
       - name: Set up GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Assemble static preview
+      - name: Prepare static landing app
+        run: |
+          mkdir -p ".pages-source/app/(marketing)" ".pages-source/public"
+          cp app/layout.tsx app/globals.css app/favicon.ico ".pages-source/app/"
+          cp "app/(marketing)/page.tsx" "app/(marketing)/landing.module.css" ".pages-source/app/(marketing)/"
+          cp postcss.config.mjs tsconfig.json ".pages-source/"
+          cp -R public/. ".pages-source/public/"
+          cat > ".pages-source/next.config.mjs" <<'EOF'
+          const nextConfig = {
+            output: "export",
+            basePath: "/logsklad",
+            trailingSlash: true,
+            images: { unoptimized: true },
+          };
+          export default nextConfig;
+          EOF
+
+      - name: Build static landing
+        env:
+          NEXT_PUBLIC_BASE_PATH: /logsklad
+          NEXT_PUBLIC_DEMO_URL: "/logsklad/demo.html?role=client&screen=overview"
+        run: pnpm exec next build .pages-source
+
+      - name: Assemble Pages site
         run: |
           mkdir -p _site/app
-          cp index.html pages-preview.css pages-preview.js _site/
+          cp -R .pages-source/out/. _site/
+          cp index.html _site/demo.html
+          cp pages-preview.css pages-preview.js _site/
           cp app/favicon.ico _site/app/favicon.ico
           cp .nojekyll _site/
 
