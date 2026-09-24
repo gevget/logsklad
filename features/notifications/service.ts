@@ -43,7 +43,7 @@ export async function notifyOrderStatusTransition(
   const driverEvents = new Set<OrderStatus>(["DRIVER_ASSIGNED"]);
   const notificationsForEvent = rows.filter((recipient) => {
     if (recipient.id === actor.id) return false;
-    if (recipient.role === "CLIENT") return clientEvents.has(status) && recipient.id !== order.createdByUserId;
+    if (recipient.role === "CLIENT") return clientEvents.has(status);
     if (recipient.role === "MANAGER") return managerEvents.has(status);
     if (recipient.role === "DRIVER") return driverEvents.has(status) && recipient.id === order.driverUserId;
     if (recipient.role === "WAREHOUSE") return warehouseEvents.has(status);

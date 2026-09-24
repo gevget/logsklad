@@ -80,8 +80,10 @@ Hierarchy:
 - Page title: strong but not oversized.
 - Card title: 14–18.
 - Primary metric: 24–34 where appropriate.
-- Body: 13–15.
-- Meta: 11–13.
+- Body: 14–16.
+- Meta / caption: 13–14.
+
+Минимальный размер любого видимого текста платформы — 13px. Подписи и метаданные остаются компактными за счёт цвета, веса и группировки, а не уменьшения шрифта.
 
 Не использовать ultra-thin weights.
 

@@ -206,14 +206,6 @@
     return '<div class="panel-heading"><div class="panel-title"><span class="panel-title-icon">' + icon(iconName || "orders") + '</span><div><h2>' + title + "</h2>" + (subtitle ? "<p>" + subtitle + "</p>" : "") + "</div></div>" + (trailing || "") + "</div>";
   }
 
-  function routePanel(order) {
-    return '<section class="panel route-panel">' + panelHeading("Текущий маршрут", "Обновление по заявке " + escapeHtml(order.number), "map", "") +
-      '<div class="route-map"><div class="route-map-label"><span>МАРШРУТ ПЕРЕВОЗКИ</span><span>МОСКОВСКИЙ РЕГИОН</span></div>' +
-      '<svg class="route-graphic" viewBox="0 0 360 120" preserveAspectRatio="none" aria-hidden="true"><path class="route-line" d="M28 83 C72 81 77 34 127 46 S180 93 220 67 286 43 332 26"/><path class="route-progress" d="M28 83 C72 81 77 34 127 46 S180 93 220 67"/><circle class="route-point" cx="28" cy="83" r="6"/><circle class="route-point" cx="220" cy="67" r="6"/><circle class="route-point-secondary" cx="332" cy="26" r="6"/></svg></div>' +
-      '<div class="route-labels"><div><small>ОТКУДА</small><strong>Москва · Промышленная, 7</strong></div><div><small>КУДА</small><strong>Склад LogSklad · Химки</strong></div></div>' +
-      '<div class="next-action"><span class="action-icon">' + icon("clock") + '</span><div><small>СЛЕДУЮЩИЙ ЭТАП</small><strong>' + escapeHtml(order.next) + "</strong><span>" + escapeHtml(order.date) + "</span></div></div></section>";
-  }
-
   function timeline() {
     const items = [
       ["Заявка обновлена", "TR-2609-00132 · принятие на складе", "Сегодня, 09:05"],
@@ -312,7 +304,7 @@
     return '<div class="workspace-grid"><section class="panel">' + panelHeading("Активные маршруты", "Назначения на 23 сентября", "map", "") + orderTable([orders[7], orders[3], orders[9]], false) + '</section><section class="panel">' + panelHeading("Доступность команды", "Короткая сводка", "truck", "") + '<dl class="detail-stat-list"><div><dt>Водители на линии</dt><dd>8 из 12</dd></div><div><dt>Свободный транспорт</dt><dd>4 автомобиля</dd></div><div><dt>Ближайшее окно</dt><dd>10:30 · Москва</dd></div><div><dt>Маршруты с вопросом</dt><dd>1 заявка</dd></div></dl><div class="next-action"><span class="action-icon">' + icon("alert") + '</span><div><small>ТРЕБУЕТ ВНИМАНИЯ</small><strong>Согласовать окно разгрузки</strong><span>TR-2609-00129 · Тула</span></div></div></section></div>';
   }
 
-  function directoryPage(screen, role) {
+  function directoryPage(screen) {
     const cards = screen === "drivers"
       ? [["Сергей Волков", "В рейсе · Газель Next", "3 задания сегодня", "truck"], ["Дмитрий Крылов", "Свободен · тентованный фургон", "Доступен для назначения", "user"]]
       : screen === "vehicles"
@@ -334,7 +326,7 @@
     if (screen === "notifications") return notificationsPage();
     if (screen === "profile") return profilePage(role);
     if (screen === "planning") return planningPage();
-    if (["drivers", "vehicles", "companies", "services", "users", "audit", "warehouse", "demo"].includes(screen)) return directoryPage(screen, role);
+    if (["drivers", "vehicles", "companies", "services", "users", "audit", "warehouse", "demo"].includes(screen)) return directoryPage(screen);
     return listPage(screen, role);
   }
 

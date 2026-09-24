@@ -76,6 +76,16 @@ function formatMoney(value: number, currency: string) {
   return new Intl.NumberFormat("ru-RU", { style: "currency", currency, maximumFractionDigits: 0 }).format(value);
 }
 
+type AttachmentCategory = Detail["files"][number]["category"];
+
+const attachmentUploadCategories: Record<DemoRole, AttachmentCategory[]> = {
+  CLIENT: ["CARGO_PHOTO", "DOCUMENT", "INVOICE", "OTHER"],
+  MANAGER: ["CARGO_PHOTO", "WAREHOUSE_PHOTO", "DOCUMENT", "INVOICE", "OTHER"],
+  DRIVER: ["CARGO_PHOTO", "DOCUMENT", "PROOF_OF_DELIVERY"],
+  WAREHOUSE: ["WAREHOUSE_PHOTO", "DOCUMENT", "OTHER"],
+  ADMIN: ["CARGO_PHOTO", "WAREHOUSE_PHOTO", "DOCUMENT", "INVOICE", "OTHER"],
+};
+
 const attachmentCategoryLabels: Record<Detail["files"][number]["category"], string> = {
   CARGO_PHOTO: "Фото груза",
   WAREHOUSE_PHOTO: "Фото склада",
@@ -117,7 +127,7 @@ function AttachmentSection({ detail, role, preview }: { detail: Detail; role: De
         </a>)}</div> : <p className="muted-copy attachment-empty">Документы по заявке пока не добавлены.</p>}
       </section>
     </div>
-    <form action={uploadOrderAttachmentAction} className="attachment-form"><input type="hidden" name="orderId" value={detail.order.id} /><label className="wizard-field"><span>{role === "DRIVER" ? "Фото груза или доставки" : "Файл (JPG, PNG, WebP или PDF; до 10 МБ)"}</span><input type="file" name="file" accept="image/jpeg,image/png,image/webp,application/pdf" capture={role === "DRIVER" ? "environment" : undefined} required disabled={preview} /></label><label className="wizard-field"><span>Категория</span><select name="category" defaultValue={role === "DRIVER" ? detail.order.status === "DELIVERY_IN_PROGRESS" ? "PROOF_OF_DELIVERY" : "CARGO_PHOTO" : "DOCUMENT"} disabled={preview}><option value="CARGO_PHOTO">Фото груза</option><option value="WAREHOUSE_PHOTO">Фото склада</option><option value="DOCUMENT">Документ</option><option value="INVOICE">Счёт</option><option value="PROOF_OF_DELIVERY">Подтверждение доставки</option><option value="OTHER">Другое</option></select></label>{role === "MANAGER" || role === "ADMIN" ? <label className="wizard-check"><input type="checkbox" name="visibility" value="INTERNAL" disabled={preview} /><span>Только для команды</span></label> : null}<button className="button button-secondary" type="submit" disabled={preview}>{role === "DRIVER" ? "Добавить фото" : "Загрузить файл"}</button></form>
+    <form action={uploadOrderAttachmentAction} className="attachment-form"><input type="hidden" name="orderId" value={detail.order.id} /><label className="wizard-field"><span>{role === "DRIVER" ? "Фото груза или доставки" : "Файл (JPG, PNG, WebP или PDF; до 10 МБ)"}</span><input type="file" name="file" accept="image/jpeg,image/png,image/webp,application/pdf" capture={role === "DRIVER" ? "environment" : undefined} required disabled={preview} /></label><label className="wizard-field"><span>Категория</span><select name="category" defaultValue={role === "DRIVER" ? detail.order.status === "DELIVERY_IN_PROGRESS" ? "PROOF_OF_DELIVERY" : "CARGO_PHOTO" : "DOCUMENT"} disabled={preview}>{attachmentUploadCategories[role].map((category) => <option key={category} value={category}>{attachmentCategoryLabels[category]}</option>)}</select></label>{role === "MANAGER" || role === "ADMIN" ? <label className="wizard-check"><input type="checkbox" name="visibility" value="INTERNAL" disabled={preview} /><span>Только для команды</span></label> : null}<button className="button button-secondary" type="submit" disabled={preview}>{role === "DRIVER" ? "Добавить фото" : "Загрузить файл"}</button></form>
   </section>;
 }
 
@@ -125,7 +135,7 @@ export async function OrderDetail({ detail, role, roleRoot, backHref, drivers, v
   const availableTransitions = await getAllowedTransitions(detail.order);
   const canReportIssue = availableTransitions.includes("ISSUE");
   const allowed = availableTransitions.filter((nextStatus) => nextStatus !== "ISSUE");
-  const hasDeliveryProof = detail.files.some((file) => file.category === "PROOF_OF_DELIVERY" && file.visibility === "CLIENT");
+  const hasDeliveryProof = detail.files.some((file) => file.category === "PROOF_OF_DELIVERY" && file.visibility === "CLIENT" && file.uploadedByUserId === detail.order.driverUserId);
   const needsDeliveryProof = allowed.includes("DELIVERED") && !hasDeliveryProof;
   const status = orderStatusConfig[detail.order.status];
   const issueEvent = detail.order.status === "ISSUE" ? detail.history.find((item) => item.toStatus === "ISSUE") : null;

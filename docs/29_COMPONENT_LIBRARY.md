@@ -68,10 +68,12 @@ lg
 icon
 ```
 
+Видимый текст — минимум 13px. Кнопки — от 44px; поля ввода — 50px на desktop и 52px на mobile. Мобильная цель нажатия — не меньше 44px.
+
 Primary:
 - orange background;
 - dark text or high-contrast white depending final AA contrast;
-- subtle hover glow allowed.
+- restrained hover glow; selected / primary actions may use the shared accent glow.
 
 Не иметь одновременно 3 primary buttons в одном visual zone.
 
@@ -88,9 +90,10 @@ API concept:
 Компонент сам определяет:
 - label;
 - semantic color;
-- icon/dot.
+- icon/dot;
+- low-contrast semantic surface and border.
 
-Не хардкодить цвет статуса в страницах.
+Не хардкодить цвет статуса в страницах и не передавать статус только оттенком.
 
 ---
 
@@ -124,7 +127,7 @@ Reusable pattern:
 Reference:
 `REF_01`, `REF_07`.
 
-Не превращать metric cards в rainbow cards.
+Значение — главный визуальный акцент; подпись и пояснение остаются читаемыми. Статусный цвет или glow использовать только при наличии смысла. Не превращать metric cards в rainbow cards.
 
 ---
 
@@ -163,7 +166,7 @@ Common:
 - total;
 - actions.
 
-Не показывать все колонки всем ролям.
+Не показывать все колонки всем ролям. Строки имеют достаточную высоту для чтения и отдельное ненавязчивое состояние hover; на mobile использовать карточки с тем же порядком данных.
 
 ---
 
@@ -295,7 +298,8 @@ Variant:
 - category;
 - uploader;
 - date;
-- actions.
+- actions;
+- visible selected-file name after choosing a file.
 
 Image variant:
 - thumbnail grid.
@@ -389,8 +393,10 @@ Desktop:
 Mobile:
 - TopBar;
 - Main;
-- BottomNav;
-- StickyAction.
+- BottomNav with labels that wrap without clipping;
+- StickyAction above the safe area.
+
+Desktop content uses a 36–40px page gutter; mobile uses 18px (16px below 375px).
 
 ---
 

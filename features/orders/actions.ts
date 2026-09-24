@@ -485,6 +485,7 @@ export async function recordWarehouseReleaseAction(formData: FormData) {
   const photoValue = formData.get("photo");
   if (photoValue !== null && !(photoValue instanceof File)) throw new Error("Выберите корректный файл подтверждения.");
   const photo = photoValue instanceof File && photoValue.size > 0 ? photoValue : null;
+  if (photo && !photo.type.startsWith("image/")) throw new Error("Для подтверждения складской выдачи выберите фото JPG, PNG или WebP.");
   const { db } = getDatabase();
   const [initialOrder] = await db.select().from(orders).where(eq(orders.id, parsed.data.orderId)).limit(1);
   if (!initialOrder) throw new Error("Заявка не найдена.");
@@ -549,7 +550,7 @@ export async function recordWarehouseReleaseAction(formData: FormData) {
       if (photo && attachmentId && storagePath && originalName) {
         await tx.insert(attachments).values({
           id: attachmentId, orderId: order.id, warehouseOperationId: operationId, uploadedByUserId: actor.id,
-          category: "PROOF_OF_DELIVERY", visibility: "CLIENT", filename: originalName, storagePath,
+          category: "WAREHOUSE_PHOTO", visibility: "CLIENT", filename: originalName, storagePath,
           mimeType: photo.type, sizeBytes: photo.size, createdAt: now,
         });
       }

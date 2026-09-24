@@ -13,12 +13,12 @@
 ## Canvas
 
 ```text
-bg.canvas        #0B0B0D
-bg.sidebar       #0E0F12
-bg.surface.1     #121318
-bg.surface.2     #17181E
-bg.surface.3     #1D1F26
-bg.elevated      #202229
+bg.canvas        #0B0C10
+bg.sidebar       #101116
+bg.surface.1     #14161B
+bg.surface.2     #1A1D23
+bg.surface.3     #22252D
+bg.elevated      #252932
 ```
 
 ---
@@ -26,9 +26,9 @@ bg.elevated      #202229
 ## 3. Borders
 
 ```text
-border.subtle    rgba(255,255,255,0.06)
-border.default   rgba(255,255,255,0.09)
-border.strong    rgba(255,255,255,0.14)
+border.subtle    rgba(255,255,255,0.07)
+border.default   rgba(255,255,255,0.11)
+border.strong    rgba(255,255,255,0.17)
 ```
 
 ---
@@ -36,10 +36,10 @@ border.strong    rgba(255,255,255,0.14)
 ## 4. Text
 
 ```text
-text.primary     #F5F6F8
-text.secondary   #A8ADB7
-text.tertiary    #737A87
-text.disabled    #545A65
+text.primary     #FAFBFD
+text.secondary   #B9C0CB
+text.tertiary    #929BA9
+text.disabled    #707987
 text.inverse     #111216
 ```
 
@@ -61,8 +61,8 @@ accent.border         rgba(255,106,26,0.36)
 ## 6. Semantic
 
 ```text
-success.primary   #2CCB7F
-success.soft      rgba(44,203,127,0.14)
+success.primary   #35D58A
+success.soft      rgba(53,213,138,0.14)
 
 warning.primary   #F4B740
 warning.soft      rgba(244,183,64,0.14)
@@ -70,8 +70,8 @@ warning.soft      rgba(244,183,64,0.14)
 danger.primary    #FF5159
 danger.soft       rgba(255,81,89,0.14)
 
-info.primary      #45B8FF
-info.soft         rgba(69,184,255,0.14)
+info.primary      #54C4FF
+info.soft         rgba(84,196,255,0.14)
 ```
 
 ---
@@ -79,8 +79,8 @@ info.soft         rgba(69,184,255,0.14)
 ## 7. Map / Operational Secondary
 
 ```text
-location.cyan     #35C2F4
-tracking.blue     #4D8CFF
+location.cyan     #50CEF5
+tracking.blue     #63A0FF
 ```
 
 Использовать очень дозированно.
@@ -107,59 +107,58 @@ Inter, system-ui, sans-serif
 
 ### Display / large metric
 ```text
-32 / 38
+36 / 44
 font-weight: 600
 ```
 
 ### H1
 ```text
-28 / 34
+32 / 40
 600
 ```
 
 ### H2
 ```text
-22 / 28
+24 / 32
 600
 ```
 
 ### H3
 ```text
-18 / 24
+20 / 28
 600
 ```
 
 ### Body L
 ```text
-16 / 24
+17 / 25
 400–500
 ```
 
 ### Body M
 ```text
-14 / 20
+15 / 23
 400–500
 ```
 
 ### Body S
 ```text
-13 / 18
+14 / 21
 400–500
 ```
 
 ### Caption
 ```text
-12 / 16
+13 / 19
 400–500
 ```
 
-### Micro
+### Minimum text size
 ```text
-11 / 14
-500
+13px for every visible label, caption, badge, and metadata value
 ```
 
-Micro не использовать для основной информации.
+Не уменьшать текст ниже 13px. Плотность интерфейса регулировать отступами, строками и группировкой.
 
 ---
 
@@ -243,10 +242,17 @@ Icon buttons:
 ### Accent glow
 Только selected / key CTA:
 ```text
-0 0 24px rgba(255,106,26,0.12)
+0 0 28px rgba(255,106,26,0.18)
 ```
 
-Не делать glow default state.
+Дополнительные состояния:
+```text
+glow.success  0 0 22px rgba(53,213,138,0.14)
+glow.info     0 0 24px rgba(84,196,255,0.14)
+surface.line  inset 0 1px rgba(255,255,255,0.05)
+```
+
+Glow применять только к выбранному состоянию, primary CTA, фокусу, текущей точке маршрута или критичному сигналу. Не делать glow default state.
 
 ---
 
@@ -271,7 +277,8 @@ Max content width:
 
 Main padding:
 ```text
-24–32px
+36–40px desktop
+18–24px mobile
 ```
 
 Gutter:
@@ -360,22 +367,35 @@ Stroke:
 
 ```css
 :root {
-  --bg-canvas: #0B0B0D;
-  --bg-surface-1: #121318;
-  --bg-surface-2: #17181E;
-  --bg-surface-3: #1D1F26;
+  --bg-canvas: #0B0C10;
+  --bg-sidebar: #101116;
+  --bg-surface-1: #14161B;
+  --bg-surface-2: #1A1D23;
+  --bg-surface-3: #22252D;
+  --bg-elevated: #252932;
 
-  --text-primary: #F5F6F8;
-  --text-secondary: #A8ADB7;
-  --text-tertiary: #737A87;
+  --text-primary: #FAFBFD;
+  --text-secondary: #B9C0CB;
+  --text-tertiary: #929BA9;
 
-  --border-default: rgba(255,255,255,.09);
+  --border-default: rgba(255,255,255,.11);
 
   --accent: #FF6A1A;
-  --success: #2CCB7F;
+  --success: #35D58A;
   --warning: #F4B740;
   --danger: #FF5159;
-  --info: #45B8FF;
+  --info: #54C4FF;
+
+  --type-caption: 13px;
+  --type-body-small: 14px;
+  --type-body: 15px;
+  --type-body-large: 17px;
+  --space-page: 40px;
+  --space-section: 24px;
+  --space-panel: 24px;
+  --glow-accent: 0 0 28px rgba(255,106,26,.18);
+  --glow-success: 0 0 22px rgba(53,213,138,.14);
+  --glow-info: 0 0 24px rgba(84,196,255,.14);
 }
 ```
 
@@ -401,7 +421,8 @@ Demo MVP:
 - icon/dot;
 - focus state;
 - keyboard-visible outline;
-- readable contrast.
+- readable contrast;
+- видимый текст не меньше 13px.
 
 ---
 

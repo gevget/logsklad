@@ -26,13 +26,16 @@ export async function uploadOrderAttachmentAction(formData: FormData) {
   const allowedCategories: readonly (typeof categories)[number][] = actor.role === "CLIENT"
     ? ["CARGO_PHOTO", "DOCUMENT", "INVOICE", "OTHER"]
     : actor.role === "DRIVER" ? ["CARGO_PHOTO", "DOCUMENT", "PROOF_OF_DELIVERY"]
-      : actor.role === "WAREHOUSE" ? ["WAREHOUSE_PHOTO", "DOCUMENT", "PROOF_OF_DELIVERY", "OTHER"]
+      : actor.role === "WAREHOUSE" ? ["WAREHOUSE_PHOTO", "DOCUMENT", "OTHER"]
         : categories;
   if (!allowedCategories.includes(category)) throw new Error("Для вашей роли нельзя загружать файлы этой категории.");
   const { db } = getDatabase();
   const [order] = await db.select().from(orders).where(eq(orders.id, orderId)).limit(1);
   if (!order) throw new Error("Заявка не найдена.");
   requirePermission(actor, "files:upload", order);
+  if (category === "PROOF_OF_DELIVERY" && (actor.role !== "DRIVER" || order.driverUserId !== actor.id || order.status !== "DELIVERY_IN_PROGRESS")) {
+    throw new Error("Подтверждение доставки может добавить назначенный водитель во время рейса.");
+  }
 
   const id = randomUUID();
   const originalName = file.name.replace(/[\\/\u0000-\u001f]/g, "_").slice(0, 220) || "attachment";

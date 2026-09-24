@@ -172,8 +172,15 @@ export async function transitionOrderStatus(input: unknown, intakeAttachment?: I
       throw new DomainError("VALIDATION_ERROR", "Для приёмки выберите склад в заявке.");
     }
     if (parsed.data.nextStatus === "DELIVERED") {
-      const [proof] = await tx.select({ id: attachments.id }).from(attachments)
-        .where(and(eq(attachments.orderId, currentOrder.id), eq(attachments.category, "PROOF_OF_DELIVERY"), eq(attachments.visibility, "CLIENT"))).limit(1);
+      const [proof] = currentOrder.driverUserId
+        ? await tx.select({ id: attachments.id }).from(attachments)
+          .where(and(
+            eq(attachments.orderId, currentOrder.id),
+            eq(attachments.uploadedByUserId, currentOrder.driverUserId),
+            eq(attachments.category, "PROOF_OF_DELIVERY"),
+            eq(attachments.visibility, "CLIENT"),
+          )).limit(1)
+        : [];
       if (!proof) throw new DomainError("VALIDATION_ERROR", "Перед подтверждением доставки добавьте клиентский Proof of Delivery.");
     }
 

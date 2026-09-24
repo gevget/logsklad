@@ -300,7 +300,7 @@ Mobile:
 - huge gradients;
 - 8 видов radius;
 - 15 цветов статусов;
-- tiny 11px body text;
+- any visible text smaller than 13px;
 - all-caps интерфейс;
 - oversized hero typography внутри ЛК;
 - dashboard, состоящий только из графиков.

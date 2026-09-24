@@ -35,20 +35,23 @@ Tailwind breakpoints можно использовать стандартные,
 ## Shell
 - top bar;
 - bottom nav;
-- 16px page padding;
+- 18px page padding (16px below 375px);
 - no permanent sidebar.
 
 ## Cards
 - full width;
-- 12–16px internal padding;
+- 16–20px internal padding;
 - avoid nested cards.
 
 ## Typography
-- H1 22–26px;
-- body 14–16px.
+- H1 26–28px;
+- body 15–16px;
+- captions and metadata at least 13px.
 
 ## Primary action
-- full-width or strong sticky bottom.
+- full-width or strong sticky bottom;
+- minimum 44px touch height;
+- leave the bottom navigation and safe area unobstructed.
 
 ---
 
@@ -109,7 +112,7 @@ Content:
 Профиль
 ```
 
-Создать может быть central accent action.
+Создать может быть центральным акцентным действием. Подписи нижней навигации не меньше 13px, при необходимости переносятся на две строки и не обрезаются.
 
 ## Manager mobile
 ```text
@@ -142,6 +145,7 @@ Mobile:
 
 ### Mobile
 - one field per row;
+- 52px touch-friendly height for primary text and numeric entry;
 - related small fields can be 2-column only if comfortable;
 - select opens mobile-friendly popover/sheet;
 - sticky Continue.

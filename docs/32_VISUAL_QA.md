@@ -1,5 +1,15 @@
 # 32 — VISUAL QA
 
+## Протокол проверки 24.09.2026
+
+- После последней правки глобальных стилей выполнено 297 браузерных проверок: 33 маршрута пяти ролей × 9 размеров от 360×800 до 1920×1080.
+- Горизонтальный overflow не найден; на ширине 390 px карточки показателей полностью видны в двухколоночной сетке.
+- Минимальный вычисленный размер видимого текста — 13 px для каждой роли; браузерных ошибок и оверлеев Next.js нет.
+- Сняты мобильные кадры: кабинеты всех ролей, мастер клиента, карточки менеджера/водителя, приёмка склада, справочники пользователей/услуг. Складской экран осмотрен после исправления сетки.
+- Проверка клавиатурной доступности, формального контраста, всех loading/empty/error-состояний и полного набора desktop-снимков остаётся открытой.
+
+---
+
 ## 1. Цель
 
 Этот документ используется после каждого крупного UI pass.
@@ -19,29 +29,32 @@
 
 Проверить:
 
-- [ ] фон соответствует Dark Logistics OS;
+- [x] фон соответствует Dark Logistics OS;
 - [ ] нет случайных чисто чёрных / серых блоков;
-- [ ] surface hierarchy читается;
-- [ ] borders тонкие;
+- [x] surface hierarchy читается;
+- [x] borders тонкие, но заметны на каждом surface level;
 - [ ] shadows используются только при необходимости;
-- [ ] orange accent дозирован;
-- [ ] semantic colors имеют смысл;
-- [ ] нет случайных purple / pink / blue accents;
-- [ ] radius консистентны;
-- [ ] иконки из одной библиотеки;
-- [ ] typography hierarchy стабильна.
+- [x] orange accent дозирован;
+- [x] orange, green, and cyan glow appear only on meaningful interaction or status states;
+- [x] semantic colors имеют смысл;
+- [x] нет случайных purple / pink / blue accents;
+- [x] radius консистентны;
+- [x] иконки из одной библиотеки;
+- [x] typography hierarchy стабильна.
+- [x] ни один видимый текст не меньше 13px.
 
 ---
 
 # 3. Typography QA
 
-- [ ] нет thin weights;
-- [ ] body text не меньше комфортного размера;
-- [ ] muted text читается;
-- [ ] page title не oversized;
+- [x] нет thin weights;
+- [x] body text и метаданные читаемы; минимальный видимый текст — 13px;
+- [x] muted text читается;
+- [x] browser-scaled small text and semantic headings stay at or above 13px;
+- [x] page title не oversized;
 - [ ] numbers / prices выровнены;
-- [ ] Russian strings не ломают layout;
-- [ ] long company names wrap correctly.
+- [x] Russian strings не ломают layout;
+- [x] long company names wrap correctly.
 
 ---
 
@@ -49,6 +62,7 @@
 
 - [ ] main content не прилипает к sidebar;
 - [ ] cards имеют одинаковую систему padding;
+- [ ] форма и вложения сгруппированы, выбранные файлы видны отдельной строкой;
 - [ ] grids align;
 - [ ] forms не растянуты на 1600px без причины;
 - [ ] large desktop имеет max-width strategy;
@@ -60,11 +74,11 @@
 
 На 375px:
 
-- [ ] no horizontal overflow;
-- [ ] bottom nav не перекрывает контент;
-- [ ] sticky CTA учитывает safe area;
-- [ ] text не становится микроскопическим;
-- [ ] buttons ≥ comfortable touch size;
+- [x] no horizontal overflow;
+- [x] bottom nav не перекрывает контент;
+- [x] sticky CTA учитывает safe area;
+- [x] текст не становится слишком мелким; подписи навигации переносятся на две строки и не обрезаются;
+- [x] buttons ≥ comfortable touch size;
 - [ ] table превращается в cards / responsive rows;
 - [ ] modal не выходит за viewport;
 - [ ] dropdown не обрезается;

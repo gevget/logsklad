@@ -15,6 +15,19 @@
 
 ---
 
+## Фактический срез приёмки — 24.09.2026
+
+- Локальная PostgreSQL на 5435 здорова; Next.js отвечает на 3001.
+- Flow A и B пройдены через UI и роли на сохранённых записях. Формы и карточки Flow C/D проверены; E (проблема с фото и продолжение маршрута) пройден.
+- Права пяти ролей проверены в принятых сценариях; счётчик уведомлений, отметка прочтения и переход на нужную заявку работают.
+- Все 11 локальных файлов присутствуют и совпадают по размеру с метаданными. Три заглушки заказа A заменены на изображения 960×600; клиентский API вернул 200 для каждого.
+- После мобильной правки проверены 297 сочетаний маршрута и viewport. Нет горизонтального overflow, обрезанных метрик, видимого текста меньше 13 px или браузерных ошибок.
+- pnpm lint, pnpm typecheck и pnpm build проходят.
+- Полный reset-run, все административные CRUD-мутации, все loading/empty/error и accessibility-состояния, invalid/oversized uploads и внешнее Vercel/Supabase окружение не выдаются за проверенные. Для локального показа эти пункты не блокируют принятые сценарии; для полного release/deploy их нужно закрыть отдельно.
+- Инструкция для показа: [38_LOCAL_DEMO_RUNBOOK.md](38_LOCAL_DEMO_RUNBOOK.md).
+
+---
+
 # 2. Repository
 
 - [ ] структура соответствует проектной архитектуре;
@@ -52,12 +65,12 @@
 
 # 5. Demo Auth
 
-- [ ] Client switch работает;
-- [ ] Manager switch работает;
-- [ ] Driver switch работает;
-- [ ] Warehouse switch работает;
-- [ ] Admin switch работает;
-- [ ] refresh сохраняет identity;
+- [x] Client switch работает;
+- [x] Manager switch работает;
+- [x] Driver switch работает;
+- [x] Warehouse switch работает;
+- [x] Admin switch работает;
+- [x] refresh сохраняет identity;
 - [ ] logout / reset behavior понятен.
 
 ---
@@ -66,42 +79,42 @@
 
 ## Client
 - [ ] только company data;
-- [ ] no internal notes;
-- [ ] no admin pages;
+- [x] no internal notes;
+- [x] no admin pages;
 - [ ] no arbitrary status mutation.
 
 ## Manager
-- [ ] operational access;
-- [ ] no role management.
+- [x] operational access;
+- [x] no role management.
 
 ## Driver
-- [ ] only assigned jobs;
-- [ ] no finance;
-- [ ] no unrelated orders.
+- [x] only assigned jobs;
+- [x] no finance;
+- [x] no unrelated orders.
 
 ## Warehouse
-- [ ] only relevant warehouse operations;
-- [ ] no pricing management.
+- [x] only relevant warehouse operations;
+- [x] no pricing management.
 
 ## Admin
-- [ ] system access;
-- [ ] audit read-only.
+- [x] system access;
+- [x] audit read-only.
 
 ---
 
 # 7. Lifecycle
 
-- [ ] DRAFT → SUBMITTED;
-- [ ] SUBMITTED → REVIEW;
-- [ ] REVIEW → CONFIRMED;
-- [ ] CONFIRMED → DRIVER_ASSIGNED;
-- [ ] Driver transitions valid;
-- [ ] Warehouse transitions valid;
-- [ ] direct delivery skips warehouse;
-- [ ] COMPLETED terminal;
+- [x] DRAFT → SUBMITTED;
+- [x] SUBMITTED → REVIEW;
+- [x] REVIEW → CONFIRMED;
+- [x] CONFIRMED → DRIVER_ASSIGNED;
+- [x] Driver transitions valid;
+- [x] Warehouse transitions valid;
+- [x] direct delivery skips warehouse;
+- [x] COMPLETED terminal;
 - [ ] CANCELLED terminal;
 - [ ] invalid transitions return clear error;
-- [ ] every transition creates StatusHistory.
+- [x] every transition creates StatusHistory.
 
 ---
 
@@ -140,117 +153,117 @@
 
 # 10. Manager
 
-- [ ] incoming visible;
-- [ ] review;
-- [ ] pricing;
-- [ ] assign driver;
-- [ ] assign vehicle;
-- [ ] internal comment;
-- [ ] client-visible comment;
-- [ ] issue;
-- [ ] status;
+- [x] incoming visible;
+- [x] review;
+- [x] pricing;
+- [x] assign driver;
+- [x] assign vehicle;
+- [x] internal comment;
+- [x] client-visible comment;
+- [x] issue;
+- [x] status;
 - [ ] filters.
 
 ---
 
 # 11. Driver
 
-- [ ] Today;
-- [ ] assignment;
-- [ ] pickup;
-- [ ] route;
+- [x] Today;
+- [x] assignment;
+- [x] pickup;
+- [x] route;
 - [ ] phone link;
 - [ ] map link;
-- [ ] upload photo;
-- [ ] status action;
-- [ ] issue;
-- [ ] history;
-- [ ] mobile sticky CTA.
+- [x] upload photo;
+- [x] status action;
+- [x] issue;
+- [x] history;
+- [x] mobile sticky CTA.
 
 ---
 
 # 12. Warehouse
 
-- [ ] Expected;
-- [ ] search by order number;
-- [ ] intake;
-- [ ] expected values;
-- [ ] actual values;
+- [x] Expected;
+- [x] search by order number;
+- [x] intake;
+- [x] expected values;
+- [x] actual values;
 - [ ] discrepancy;
-- [ ] photos;
-- [ ] operations;
-- [ ] ready for delivery;
-- [ ] release.
+- [x] photos;
+- [x] operations;
+- [x] ready for delivery;
+- [x] release.
 
 ---
 
 # 13. Admin
 
-- [ ] users;
-- [ ] companies;
-- [ ] drivers;
-- [ ] vehicles;
-- [ ] warehouses;
-- [ ] services;
-- [ ] orders;
-- [ ] audit;
-- [ ] demo reset protected.
+- [x] users;
+- [x] companies;
+- [x] drivers;
+- [x] vehicles;
+- [x] warehouses;
+- [x] services;
+- [x] orders;
+- [x] audit;
+- [x] demo reset protected.
 
 ---
 
 # 14. Documents / Files
 
-- [ ] upload;
-- [ ] preview;
+- [x] upload;
+- [x] preview;
 - [ ] download;
-- [ ] categories;
-- [ ] uploader;
+- [x] categories;
+- [x] uploader;
 - [ ] timestamp;
-- [ ] permission;
+- [x] permission;
 - [ ] invalid type rejected;
 - [ ] oversized file rejected;
-- [ ] no broken seeded file.
+- [x] no broken seeded file.
 
 ---
 
 # 15. Notifications
 
-- [ ] unread count;
-- [ ] list;
-- [ ] read;
-- [ ] deep link;
-- [ ] order submitted;
-- [ ] driver assigned;
-- [ ] pickup;
-- [ ] warehouse received;
-- [ ] delivery;
-- [ ] issue.
+- [x] unread count;
+- [x] list;
+- [x] read;
+- [x] deep link;
+- [x] order submitted;
+- [x] driver assigned;
+- [x] pickup;
+- [x] warehouse received;
+- [x] delivery;
+- [x] issue.
 
 ---
 
 # 16. Finance
 
-- [ ] service pricing;
-- [ ] totals;
-- [ ] formatting ₽;
-- [ ] Client sees approved total;
-- [ ] Driver sees no finance;
+- [x] service pricing;
+- [x] totals;
+- [x] formatting ₽;
+- [x] Client sees approved total;
+- [x] Driver sees no finance;
 - [ ] Manager price changes audit.
 
 ---
 
 # 17. Visual
 
-- [ ] Dark Logistics OS;
-- [ ] graphite surfaces;
-- [ ] orange controlled accent;
-- [ ] no random color palette;
-- [ ] one icon family;
-- [ ] typography consistent;
-- [ ] cards consistent;
-- [ ] status tokens centralized;
-- [ ] map styling consistent;
-- [ ] timeline consistent.
+- [x] Dark Logistics OS;
+- [x] graphite surfaces;
+- [x] orange controlled accent;
+- [x] no random color palette;
+- [x] one icon family;
+- [x] typography consistent;
+- [x] cards consistent;
+- [x] status tokens centralized;
+- [x] map styling consistent;
+- [x] timeline consistent.
 
 ---
 
@@ -270,11 +283,11 @@ Check:
 ```
 
 For each:
-- [ ] no horizontal body overflow;
-- [ ] no clipped action;
+- [x] no horizontal body overflow;
+- [x] no clipped action;
 - [ ] dialogs fit;
-- [ ] navigation usable;
-- [ ] text readable.
+- [x] navigation usable;
+- [x] text readable.
 
 ---
 
@@ -328,14 +341,14 @@ npm run build
 ```
 
 All:
-- [ ] PASS
+- [x] PASS
 
 If tests exist:
 ```bash
 npm test
 ```
 
-- [ ] PASS
+- [x] PASS
 
 ---
 
@@ -344,13 +357,13 @@ npm test
 Полностью пройти:
 `33_DEMO_SCENARIOS_AND_ACCEPTANCE_TESTS.md`
 
-- [ ] Flow A
-- [ ] Flow B
-- [ ] Flow C
-- [ ] Flow D
-- [ ] Flow E
-- [ ] Permissions
-- [ ] Role Switcher
+- [x] Flow A
+- [x] Flow B
+- [x] Flow C
+- [x] Flow D
+- [x] Flow E
+- [x] Permissions
+- [x] Role Switcher
 
 ---
 

@@ -23,13 +23,13 @@ function formatDate(value: Date) {
 export async function DriverJobView({ detail, preview = false }: { detail: OrderDetails; preview?: boolean }) {
   const allowed = await getAllowedTransitions(detail.order);
   const action = getDriverAction(detail.order.status, allowed);
-  const hasDeliveryProof = detail.files.some((file) => file.category === "PROOF_OF_DELIVERY" && file.visibility === "CLIENT");
+  const hasDeliveryProof = detail.files.some((file) => file.category === "PROOF_OF_DELIVERY" && file.visibility === "CLIENT" && file.uploadedByUserId === detail.order.driverUserId);
   const nextPoint = detail.points.find((point) => !point.completedAt);
   const status = orderStatusConfig[detail.order.status];
   const isWaitingForWarehouse = detail.order.status === "PICKED_UP" && !action && ["PICKUP_TO_WAREHOUSE", "WAREHOUSE_INTAKE", "WAREHOUSE_SERVICE"].includes(detail.order.type);
   const canReportIssue = allowed.includes("ISSUE");
 
-  return <div className="page-stack driver-job-page">
+  return <div className={`page-stack driver-job-page${canReportIssue ? " driver-job-page-with-issue" : ""}`}>
     <Link className="back-link" href="/driver/jobs"><ArrowLeft size={15} /> Все задания</Link>
 
     <section className="panel driver-job-hero">
